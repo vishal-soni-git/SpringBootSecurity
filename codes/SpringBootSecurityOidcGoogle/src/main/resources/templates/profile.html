@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile page</title>
+</head>
+<body>
+
+<h1>Welcome to Profile</h1>
+<h2>Name: <span th:text="${fullName}"></span> </h2>
+<h2>Email: <span th:text="${email}"></span> </h2>
+<h2>Address: <span th:text="${address}"></span> </h2>
+
+<a href="logout">Logout</a>
+</body>
+</html>

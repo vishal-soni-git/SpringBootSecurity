@@ -1,0 +1,8 @@
+=> Point to Remember :-
+	-> When we provide spring-boot-starter-security, it by default provides "Form-Based Authentication"
+	-> "In-Memory Authentication" and "Web-Based Authentication" are mostly used only for testing purpose, they are not recommended for production (real-world projects)
+	-> HttpBasic does not provide the logout concept
+	-> If there are multiple users for "Web-Based Authentication" then we should provide their roles
+	-> It is recommended to use password encoder to secure our password
+	
+========================================================================================================

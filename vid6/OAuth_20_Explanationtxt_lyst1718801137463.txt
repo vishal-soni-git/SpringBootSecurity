@@ -1,0 +1,99 @@
+=> OAuth 2.0 (Open Authorization) :
+	-> OAuth 2.0 is a "token-based authorization protocol(framework)" that can be integrated with various frameworks or applications to manage authorization
+	-> OAuth 2.0 uses access tokens to allow the third-party websites or applications to access a user's resources without exposing their credentials
+		= Diagram
+	-> NOTE : OAuth 2.0 is an authorization protocol (framework) but it can be adapted to handle authentication as well, especially when combined with OpenID Connect (OIDC)
+	
+	-> Some common uses of OAuth 2.0 are :-
+		1. Single Sign-On (SSO)
+			= Use Case: Corporate environments, educational institutions, large enterprises.
+			= Description: OAuth tokens enable SSO, allowing users to authenticate once and access multiple applications and services without re-entering credentials. This enhances security and user convenience.
+			= Example: A user logs into a company's intranet portal and automatically gains access to various internal applications like email, project management tools, and HR systems.
+		2. Social Logins
+			= Use Case: Consumer-facing web and mobile applications.
+			= Description: Applications can use OAuth to authenticate users via their social media accounts (e.g., Google, Facebook). This simplifies the registration process and improves user experience.
+			= Example: A user signs up for a new app using their Google account. The app uses OAuth to obtain an access token, allowing it to access the user's Google profile information.
+		3. API Integration
+			= Use Case: Third-party service integrations, B2B applications.
+			= Description: OAuth tokens allow secure access to APIs, enabling third-party applications to perform actions on behalf of the user without needing direct access to user credentials.
+			= Example: A project management tool integrates with a cloud storage service to upload and manage documents. The tool uses OAuth tokens to authenticate API requests to the cloud storage service.
+		4. Content Sharing
+			= Use Case: Social media platforms, collaborative tools.
+			= Description: OAuth tokens enable applications to post content to social media or other platforms on behalf of the user, enhancing social interactions and collaboration.
+			= Example: A user authorizes a photo editing app to post edited images directly to their Instagram account. The app uses OAuth tokens to authenticate these posting requests.
+		5. Cloud Storage Integration
+			= Use Case: File management applications, backup services.
+			= Description: OAuth tokens provide secure access to cloud storage services, allowing applications to manage user files without handling user credentials.
+			= Example: A backup service application uses OAuth to connect to a user's Google Drive, allowing it to back up and restore files as needed.
+		etc
+		
+----------------------------------	
+	
+	-> OAuth 2.0 provides some "grant types" which are as follows :-
+		>> Grant types means "How Users Get In (Authorization)". It defines how users are authorized to enter our application. They're like different ways to prove you're allowed in.
+		>> Some grant types are as below :
+			1. Authorization Code Grant (AUTHORIZATION_CODE) - Mostly used
+				= Usage: Most commonly used in web applications and native mobile apps.
+				= Description: This flow is considered the most secure as it involves exchanging an authorization code for an access token, reducing the risk of token leakage.
+			2. Client Credentials Grant (CLIENT_CREDENTIALS) - Mostly used
+				= Usage: Commonly used for server-to-server interactions, where the client accesses its own resources.
+				= Description: This flow involves the client authenticating with the authorization server using its own credentials to obtain an access token.
+			3. Implicit Grant (IMPLICIT) - Less Used
+				= Usage: Historically used in single-page applications (SPAs) and public clients that cannot securely store a client secret. Usage is decreasing.
+				= Description: This flow directly issues an access token without an authorization code exchange.
+			4. Device Code Grant (DEVICE_CODE) - Less Used
+				= Usage: Used for devices with limited input capabilities, such as smart TVs and IoT devices.
+				= Description: This flow allows the user to authorize a device by entering a user code on another device with more input capabilities.
+			5. Password Grant (PASSWORD) - Deprecated
+				= Usage: Used in trusted environments where the client application can handle user credentials securely, such as first-party applications.
+				= Description: This flow allows the client to directly obtain an access token by using the resource owner's credentials.
+				
+				
+	-> OAuth 2.0 provides some "scopes" which are as follows :-
+		>> Scopes means "What Users Can Do Inside (Access Levels)". It define what a user can do after entering the application (what parts they can access)
+		>> Some scopes are as below :-
+			1. openid
+				= Usage: Used in OpenID Connect to request an ID token, allowing the client to verify the user's identity.
+				= Description: This scope indicates that the application wants to authenticate the user and obtain basic user profile information.
+			2. profile
+				= Usage: Used to access basic profile information of the user, such as name, profile picture, and gender.
+				= Description: This scope requests access to the user's profile information.
+			3. email
+				= Usage: Used to access the user's email address.
+				= Description: This scope requests access to the user's email address and possibly email verification status.
+			4. read
+				= Usage: Used to request read access to protected resources.
+				= Description: This scope requests read-only access to resources.
+			5. write
+				= Usage: Used to request write access to protected resources.
+				= Description: This scope requests read and write access to resources.
+			6. offline_access
+				= Usage: Used to request a refresh token, allowing the application to obtain new access tokens without requiring the user to re-authenticate.
+				= Description: This scope indicates that the application wants to access resources on behalf of the user even when they are offline.
+			etc
+			
+----------------------------------	
+	
+	-> In OAuth 2.0, there are several types of tokens used for various purposes which are as follows :
+		1. Access Tokens
+			= Purpose: To access protected resources on behalf of the user.
+			= Description: Access tokens are short-lived tokens that clients use to access protected resources. They are typically included in the HTTP headers of requests to resource servers.
+			= Lifespan: Short-lived (minutes to hours).
+		2. Refresh Tokens
+			= Purpose: To obtain new access tokens without requiring the user to re-authenticate.
+			= Description: Refresh tokens are long-lived tokens that clients use to request new access tokens after the current access token expires. This helps maintain a seamless user experience.
+			= Lifespan: Long-lived (days to months).
+		3. ID Tokens
+			= Purpose: To verify the user's identity.
+			= Description: ID tokens are used in OpenID Connect to authenticate users. They contain claims about the user and are intended to be consumed by the client. They are often used in conjunction with access tokens.
+			= Lifespan: Short-lived, similar to access tokens.
+		4. Authorization Codes
+			= Purpose: To exchange for access tokens and refresh tokens.
+			= Description: Authorization codes are short-lived codes that the client receives after the user authorizes the client. The client exchanges this code with the authorization server for access and refresh tokens.
+			= Lifespan: Very short-lived (usually minutes).
+		5. Device Codes
+			= Purpose: To obtain user authorization on devices with limited input capabilities.
+			= Description: Device codes are used in the Device Authorization Grant flow. They are presented to the user on a device, and the user authorizes the device on a separate input-capable device.
+			= Lifespan: Short-lived.
+		
+=======================================================================================================

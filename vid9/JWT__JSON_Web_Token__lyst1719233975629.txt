@@ -1,0 +1,41 @@
+=> JWT (JSON Web Token) :-
+	-> A JWT (JSON Web Token) is a compact, URL-safe way of securely transmitting information between parties as a JSON object
+	-> JWT consists of three parts, each Base64URL encoded :-
+		1. Header: 
+			= Header consists of two parts: the type of the token (i.e. JWT) and the signing algorithm being used (e.g. HMAC SHA256 or RSA)
+		2. Payload:
+			= Payload holds the claims, which are the pieces of information about the user (e.g., username, roles, expiration time etc).
+		3. Signature:
+			= Signature ensures the token's integrity and authenticity.
+			= It is created by taking the Base64URL encoded header, Base64URL encoded payload, a secret, and the signing algorithm specified in the header. This ensures the token hasn't been tampered with in transit.
+			
+	-> JWTs are used in various scenarios as below :-
+		1. Authentication:
+			= After a user logs in, the server generates a JWT and sends it back to the client. The client will then include this JWT in the headers of subsequent requests to access protected routes and resources.
+		2. Authorization:
+			= JWTs can be used to securely transmit information between parties, such as user roles and permissions, enabling access control to resources based on the embedded claims.
+		3. Information Exchange:
+			= JWTs are a good way to securely transmit information between parties because they can be signed, ensuring the integrity and authenticity of the data
+			
+	-> Advantages of JWT:
+		1. Compact:
+			= JWTs are compact and can be sent via URL, POST parameters, or inside an HTTP header. This makes them ideal for use in mobile applications and HTTP headers.
+		2. Self-Contained:
+			= The payload contains all the necessary information about the user and other data, eliminating the need to query the database multiple times.
+		3. Secure:
+			= JWTs can be signed using a secret or a public/private key pair. This ensures that the token has not been altered, providing a means to verify the integrity and authenticity of the token.
+		4. Stateless:
+			= JWTs are stateless; the server does not need to store any session data. This can reduce the server’s storage load, particularly in distributed systems.
+		5. Performance:
+			= Since the payload is self-contained, it reduces the need for database lookups. This can enhance performance in scenarios where scalability is a concern.
+		6. Interoperability:
+			= JWTs are platform-independent and can be used across different programming languages and frameworks. This interoperability makes them a versatile choice for authentication and authorization across various systems.
+		7. Flexibility:
+			= JWTs can be used for a wide range of use cases, such as user authentication, information exchange, and secure API communication. They are flexible enough to accommodate different scenarios.
+			
+	-> To implement JWT in Spring Boot we have to provide 3 dependencies :-
+		1. jjwt-api
+		2. jjwt-impl
+		3. jjwt-jackson
+			
+========================================================================================================

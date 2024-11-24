@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title> Login Page </title>
+</head>
+<body style="background-color: #d4f5ff">
+	<h3> Login Here </h3>
+	
+	<div th:if="${param.error}">
+		<span style="font-weight: bold; color: red;"> Username and Password didnt matched </span> <br/> <br/>
+	</div>
+	
+	<div th:if="${param.logoutStatus}">
+		<span style="font-weight: bold; color: green;"> Logout Successfully </span> <br/> <br/>
+	</div>
+	
+	<form th:action="@{/loginForm}" method="post">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		Username : <input type="text" name="username" /> <br/> <br/>
+		Password : <input type="password" name="password" /> <br/> <br/>
+		<input type="submit" value="Login" />
+	</form>
+</body>
+</html>

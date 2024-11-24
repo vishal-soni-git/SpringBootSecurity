@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title> Register Page </title>
+	</head>
+	<body>
+		<h2> Register Here </h2>
+		
+		<h3 th:if="${successMsg}" th:text="${successMsg}" style="color: green"></h3>
+		<h3 th:if="${failMsg}" th:text="${failMsg}" style="color: red"></h3>
+		
+		<form th:action="@{/regForm}" method="post" th:object="${student}">
+			Name : <input type="text" name="name" /> <br/> <br/>
+			Email : <input type="text" name="email" /> <br/> <br/>
+			Password : <input type="password" name="password" /> <br/> <br/>
+			City : <input type="text" name="city" /> <br/> <br/>
+			<input type="submit" value="Register" />
+		</form> <br/> <br/>
+		
+		If already registered, <a href="login"> Click Here </a>
+	</body>
+</html>

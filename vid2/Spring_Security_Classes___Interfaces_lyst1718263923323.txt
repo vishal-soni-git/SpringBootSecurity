@@ -1,0 +1,183 @@
+=> Core User Representation Interface:
+
+1. UserDetails (Interface):
+	-> It is an interface which represents a user for Spring Security authentication.
+	-> It provides methods to access user information like username, password, enabled status, account non-expired, credentials non-expired, and account non-locked flags.
+	-> Important Methods:
+		= getUsername():
+			- Returns the user's username.
+		= getPassword():
+			- Returns the user's password (typically in encoded format).
+		= getAuthorities():
+			- Returns a collection of GrantedAuthority objects representing the user's authorities (permissions).
+		= isAccountNonExpired():
+			- Returns true if the user's account is not expired.
+		= isAccountNonLocked():
+			- Returns true if the user's account is not locked.
+		= isCredentialsNonExpired():
+			- Returns true if the user's credentials (password) are not expired.
+		= isEnabled():
+			- Returns true if the user's account is enabled.
+
+-----------------------------------------------------------------------
+
+=> User Implementation Class
+
+2. User (Class):
+	-> It is the concrete implementation of the UserDetails interface, providing default implementations for its methods.
+	-> It serves as a convenient base class for creating custom user objects, inheriting the necessary properties and methods.
+	-> Important Methods:
+		= All methods inherited from the UserDetails interface.
+		
+-----------------------------------------------------------------------
+
+=> User Data Loading Interface/Class
+
+3. UserDetailsService (Interface):
+	-> It is an interface responsible for loading user information based on a username.
+	-> Spring Security uses this interface to retrieve user information from a data source (e.g., database, LDAP) during authentication
+	-> Important Method:
+		= loadUserByUsername(String username):
+			- Loads a UserDetails object containing the user's information given their username.
+
+4. UsernameNotFoundException (Class):
+	-> It is a class extending RuntimeException, thrown by UserDetailsService if the user cannot be found based on the provided username.
+	-> This exception signals to Spring Security that the user authentication attempt failed because the user doesn't exist
+	-> No methods (it's just an exception class).
+
+-----------------------------------------------------------------------
+
+=> Password Encoding Interface/Class
+
+5. PasswordEncoder (Interface):
+	-> It is an interface defining methods for encoding and checking passwords.
+	-> It ensures secure storage and comparison of passwords.
+	-> It declares methods for encoding plain text passwords into a secure format (hashing) and verifying encoded passwords against plain text attempts.
+	-> Important Methods:
+		= encode(CharSequence rawPassword):
+			- Encodes a plain text password into a secure format.
+		= matches(CharSequence rawPassword, String encodedPassword):
+			- Compares a plain text password against an encoded password.
+
+6. BCryptPasswordEncoder (Class):
+	-> It is a concrete implementation of the PasswordEncoder interface which provides secure password encoding and verification using BCrypt hashing algorithm.
+	-> It is strongly recommended for password hashing due to its robustness and resistance to brute-force attacks.
+	-> Important Methods:
+		= All methods inherited from the PasswordEncoder interface.
+
+-----------------------------------------------------------------------
+
+=> Security Configuration Class
+
+7. HttpSecurity (Class):
+	-> It is a core class for configuring web security in Spring Security (web applications).
+	-> It is used in our Spring Security configuration class to establish security requirements for our web application.
+	-> It provides a fluent API to define security aspects like form login, HTTP Basic authentication, CSRF protection, authorization rules, and more.
+	-> Important Methods:
+		= authorizeRequests()
+			- Configures URL authorization rules for different request paths.
+		= formLogin()
+			- Enables form-based authentication for user login processes.
+		= logout()
+			- Configures logout functionality, including URL and session invalidation.
+		= httpBasic()
+			- Configures HTTP Basic authentication for securing requests.
+		= csrf()
+			- Manages Cross-Site Request Forgery (CSRF) protection settings.
+		= sessionManagement()
+			- Controls session creation, concurrency, and invalidation policies.
+		= rememberMe()
+			- Enables persistent login using remember-me tokens.
+		= exceptionHandling()
+			- Customizes handling of security exceptions and redirection policies.
+		etc
+
+-----------------------------------------------------------------------
+
+=> Authentication Objects and Providers Interface/Class
+
+8. GrantedAuthority (Interface):
+	-> It is an interface representing an authority (permission) granted to a user.
+	-> Important Method:
+		= getAuthority():
+			- Returns the authority string associated with this grant.
+			
+9. UsernamePasswordAuthenticationToken (Class):
+	-> It is a class representing an authentication attempt using a username and password.
+	-> It is commonly used to represent an authentication attempt during form login or HTTP Basic authentication. We typically create an instance of this class with the user's username, password (often in plain text), and any additional credentials (e.g., one-time password) and pass it to the AuthenticationManager for authentication.
+	-> Important Constructors / Methods:
+		= UsernamePasswordAuthenticationToken(Object principal, Object credentials):
+			- Constructor accepting the user principal (e.g., username) and credentials (e.g., password).
+		= UsernamePasswordAuthenticationToken(Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities):
+			- Constructor accepting principal, credentials, and a collection of GrantedAuthority objects representing the user's authorities (optional).
+		= getPrincipal():
+			- Returns the user principal (e.g., username).
+		= getCredentials():
+			- Returns the user's credentials (e.g., password).
+		= getAuthorities():
+			- Returns a collection of GrantedAuthority objects representing the user's authorities.
+		etc
+	
+-----------------------------------------------------------------------
+
+=> Authentication Management Interfaces/Classes (Advanced):
+
+10. AuthenticationManager (Interface):
+	-> It is an interface representing the component responsible for authenticating users.
+	-> Spring Security uses an AuthenticationManager to perform user authentication. We can configure custom authentication providers or use the default one.
+	-> Important Method:
+		= authenticate(Authentication authentication):
+			- Attempts to authenticate the user based on the provided Authentication object (e.g., UsernamePasswordAuthenticationToken). It throws an AuthenticationException if the authentication fails.
+
+11. Authentication (Interface):
+	-> It is an interface representing an authenticated user after a successful login attempt.
+	-> It is used throughout the application to access the currently authenticated user's information.
+	-> It provides methods to access information about the authenticated user, such as the principal, credentials, authorities, and authentication details (e.g., time of authentication).
+	-> Important Methods:
+		= getPrincipal():
+			- Returns the user principal (e.g., username).
+		= getCredentials():
+			- Returns the user's credentials (e.g., password, typically in a non-sensitive format after authentication).
+		= getAuthorities():
+			- Returns a collection of GrantedAuthority objects representing the user's authorities.
+		= getDetails():
+			- Returns additional details about the authentication (optional).
+		etc
+
+12. AuthenticationProvider (Interface):
+	-> It is an interface defining a mechanism for authenticating users.
+	-> Spring Security allows us to plug in custom AuthenticationProvider implementations if we need to integrate with external authentication systems (e.g., LDAP, Active Directory).
+	-> Important Method:
+		= authenticate(Authentication authentication):
+			- Attempts to authenticate the user based on the provided Authentication object. It should return a fully populated Authentication object if successful, or null if authentication fails.
+
+13. SecurityFilterChain (Class): (Introduced in Spring Security 5)
+	-> It is a class which represents a security filter chain that Spring Security applies to our web application for security enforcement.
+	-> It is used in our Spring Security configuration class to define the security filter chain for our application. These filters handle various security aspects like authentication, authorization, CSRF protection, and more.
+	-> Important Methods:
+		= matches(HttpServletRequest request)
+			- Determines if the filter chain should apply to a given request.
+		= getFilters()
+			- Returns the list of filters to be applied for the chain.
+		= addFilter(Filter filter)
+			- Adds a filter to the end of the current filter list.
+		= addFilterBefore(Filter filter, Class<? extends Filter> beforeFilter)
+			- Adds a filter before a specified filter in the chain.
+		= addFilterAfter(Filter filter, Class<? extends Filter> afterFilter)
+			- Adds a filter after a specified filter in the chain.
+		= configure(HttpSecurity http)
+			- Customizes the HttpSecurity configuration for the filter chain.
+		etc
+	-> NOTE : 
+		= Spring Security filter chains are typically configured using a fluent API with methods like http.csrf().and().authorizeRequests(), etc.
+		
+-----------------------------------------------------------------------
+
+14. Principal (Interface):
+	-> It is an interface representing the entity (usually a user) associated with a security context.
+	-> It represents the currently authenticated user in the security context. Spring Security exposes the authenticated user as a Principal object, often accessed via the SecurityContextHolder.
+	-> Important Method:
+		= getName():
+			- Returns the name of the principal (e.g., username).
+			
+=======================================================================================================

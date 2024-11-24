@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title> Profile Page </title>
+	</head>
+	
+	<body>
+		<h1> Welcome to Profile </h1>
+		
+		<h2> Name  : <span th:text="${modelName}"></span> </h2>
+		<h2> Email : <span th:text="${modelEmail}"></span> </h2>
+		
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Logout" />
+		</form>
+		
+	</body>
+</html>

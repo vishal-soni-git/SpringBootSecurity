@@ -1,0 +1,39 @@
+=> Spring Security Request Processing:
+
+	1. Client Sends Request:
+		= The process begins when a client (typically a web browser) sends a request to access a protected resource in the application. This could be a request to view a webpage, access an API endpoint, or perform some action within the application.
+
+	2. Request Reaches Spring Security Filter Chain:
+		= When the request hits the application, it first goes to the "FilterChainProxy" (class), which is the entry point for Spring Security filters
+		= These filters handle tasks like authentication, authorization, and CSRF protection.
+
+	3. Authentication Process:
+		= If the requested resource is protected, the authentication process begins.
+		= If the user is not authenticated (i.e., does not have a valid session), Spring Security prompts for credentials based on the configured method (e.g., HTTP Basic, form-based login)
+			>> For form-based authentication, Spring Security typically redirects the user to a login page where they enter their credentials (username and password).
+		= The user enters their credentials (username and password) in the form-based login.
+		= The user credentials are processed through the "attemptAuthentication()" method in the "UsernamePasswordAuthenticationFilter" (class).
+
+	4. User Authentication:
+		= Once the user submits their credentials, Spring Security authenticates the user.
+		= Credentials are verified against configured providers (in-memory, database, LDAP, etc.) by  authenticate() method in AuthenticationManager (interface)
+		= If the authentication is successful, Spring Security creates an authentication object and sets it in the security context.
+		
+	5. Authorization Process:
+		= After successful authentication, it checks the user permissions (roles, access rules)
+		= "AccessDecisionManager" (interface) makes final decision using decide() method.
+		= If the user has the necessary authorities and meets the access control rules, the request is allowed to proceed; otherwise, it is denied.
+
+	6. Request Processing:
+		= Once the user is authenticated and authorized, the request continues its processing.
+		= If the request requires additional security measures such as CSRF protection, Spring Security applies those measures accordingly.
+
+	7. Response Generation:
+		= Finally, the application generates a response to the client based on the request processing outcome.
+		= If the request was successful and the user is authorized, the requested resource is returned to the client.
+		= If the request failed due to authentication or authorization issues, an appropriate error response or redirection is sent to the client.
+
+	8. Session Management and Cleanup:
+		= Spring Security manages user sessions and performs cleanup tasks as needed, such as invalidating sessions upon logout or session expiration.
+		= Spring Security's "SessionManagementFilter" (class) manages user sessions.
+		

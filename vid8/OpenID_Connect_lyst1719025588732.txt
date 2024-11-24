@@ -1,0 +1,26 @@
+=> OIDC (OpenID Connect) :-
+	-> OIDC is an authentication protocol (or identity layer) that is built on top of the OAuth 2.0 framework.
+	-> OIDC utilizes an existing trusted identity provider (IdP) like Google, Microsoft, Facebook, Github etc to confirm a user's identity and obtain basic profile information. We don't need to create and manage our own login system
+	-> OIDC uses secure tokens (ID tokens or JWT) to securely transmit essential user details like name, email, profile pic etc instead of sharing raw credentials.
+	
+	-> Advantages of Using OIDC:
+		1. Single Sign-On (SSO):
+			= OIDC enables Single Sign-On (SSO), allowing users to sign in to multiple applications using their existing credentials from a trusted Identity Provider (IdP), providing a seamless experience.
+		2. Enhanced Security:
+			= OIDC avoids the need to store user passwords in applications, reducing the risk of data breaches.
+		3. Simplified Development:
+			= OIDC offers a standardized approach to user authentication, making it easier for developers to integrate into their applications.
+		4. Standardized Protocol:
+			= It's a widely adopted protocol, ensuring compatibility across different platforms and applications.
+		5. Scalability:
+			= OIDC can be used with various identity providers and applications, making it suitable for large-scale deployments.
+			
+	-> Use Cases of OIDC:
+		1. Web Applications:
+			= OIDC is commonly used in web-based applications to enable SSO and streamline login workflows.
+		2. Mobile Applications:
+			= Mobile apps can integrate OIDC to provide a familiar login experience and access user information securely.
+		3. APIs:
+			= OIDC can be used to authenticate users accessing APIs, ensuring only authorized individuals can interact with sensitive data.
+			
+=======================================================================================================

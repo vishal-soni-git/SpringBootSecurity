@@ -1,0 +1,108 @@
+=> NOTE :-
+	= We can achieve security in J2EE technologies i.e. Servlets & JSP, but it is difficult to implement security and was also limitied
+	= We can integrate Spring Security with J2EE technologies
+	
+=========================================================================================================
+
+=> Spring Security :-
+	-> History :-
+		= 2003 : Ben Alex started one project i.e. "Acegi Security System for Spring"
+		= 2004 : Spring Security (version 1.0) was publicly released under Apache Licence (keeping the "Acegi" name during its initial release)
+		= 2008 : Spring Security (version 2.0) was released, marking the official adoption of the "Spring Security" name for the framework
+		= Today the latest version is "Spring Security 6.3.0"
+		
+	-> Advantages :-
+		1. Open Source Lightweight Framework:
+			= It is open source and lightweight which makes it easy to use
+		2. Hightly configurable and pluggable:
+			= Supports java, annotations and XML configurations and it can be integrated with various technologies (Spring Data, Spring MVC, Spring Boot, LDAP, Spring WebFlux etc)
+		3. Strong security measures:
+			= Protects again common web threats i.e. CSRF, XSS, clickjacking, session fixation etc
+		4. Support modern authentication methods:
+			= Supports social logins, token-based authentication, multi-factor authentication etc
+		5. Extensive community and ecosystems:
+			= Provides rich documentation, tutorials and libraries
+		6. Contineous updates and improvement:
+			= Regular releases ensures bug fixation, security enhancements and new features
+		etc
+		
+	-> Types of Spring Security (Spring Security Features) :-
+		1. Authentication
+			1.1 In-Memory Authentication
+				>> Simple for testing and demos, not recommended for production due to security risks
+			1.2 Web-Based Authentication
+				>> HTTP Basic
+					- Sends credentials in plain test (Base64 encoded), hence its less secure
+				>> HTTP Digest
+					- Sends credentials in hases form, providing better security
+			1.3 Form-Based Authentication
+				>> Custom Forms
+					- Username and password login through custom login forms
+				>> Captcha
+					- Captcha integration for enhanced security
+			1.4 Database Authentication
+				>> JDBC (Java Database Connectivity)
+					- Verify credentials against relational database (MySQL, Oracle etc)
+				>> Custom DB (ORM)
+					- User hibernate/JPA for queries in our database (any)
+				>> LDAP (Lightweight Directory Access Protocol)
+					- Centralize user management with a dedicated LDAP server
+			1.5 Social Login
+				>> OpenID Connect
+					- Single Sign-On (SSO) with popular providers eg. google or facebook
+				>> OAuth 2.0
+					- Authenticate users using third-party authorized servers
+			1.6 Remeber-Me Authentication
+				>> Stores a cookie for automatic login after successful authentication
+			1.7 Token-Based Authentication
+				>> JWT (JSON Web Token)
+					- Securely transmit the user information between applications
+			etc
+		2. Authorization
+			2.1 Role-Based Access Control (RBAC)
+			2.2 Permission-Based Access Control (PBAC)
+			2.3 URL-Based Access Control
+			2.4 API Security
+			etc
+		3. Additional Features :-
+			3.1 CSRF (Cross-Site Request Forgery) Protection
+			3.2 XSS (Cross-Site Scripting) Protection
+			etc
+			
+	-> Spring Security Flow :-
+		>> Check other notes
+		
+-------------------------------------------------------------------------
+
+=> NOTE :-
+	Spring Security mostly focus on 2 areas i.e. Authentication and Authorization
+	
+	
+=> Authentication :-
+	-> It's the process of verifying a user's identity to confirm they are who they claim to be
+	-> It's the first level of security before granting access to resources
+	-> There are various types of authentication:
+		1. Knowledge Based Authentication
+			>> Username and password
+			>> PIN codes
+			>> Security questions
+		2. Possession Based Authentication
+			>> Phone or text messages (OTP)
+			>> Key cards and badges
+			>> Access token devices
+		3. Biometric Authentication
+			>> Fingerprint
+			>> Iris scan
+
+
+=> Authorization :-
+	-> It is the process of providing special permission or authority or action based on their roles (admin, user, guest etc)
+	-> It comes after successful authentication, granting specific privilidges within the application
+	-> For examples :
+		1. Role-Based Authorization
+			>> Users assigned specific roles (admin, user, guest etc) with defined permission
+		2. Attribute-Based Authorization
+			>> User attributes (department level) determine access to resources
+		etc
+		
+=======================================================================================================
